@@ -9,5 +9,6 @@
 
 int main() {
 	/* Acá pueden realizar sus propias pruebas */
+	strCmp("hola", "hole");
 	return 0;
 }
