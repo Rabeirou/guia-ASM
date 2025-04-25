@@ -30,8 +30,8 @@ strCmp:
 
 	.ciclo:
 		mov cl, [rdi]
-		mov bl, [rsi]
-		cmp cl, bl
+		mov dl, [rsi]
+		cmp cl, dl
 		jb .menor
 		jg .mayor
 		add rdi, 1
@@ -55,10 +55,57 @@ strCmp:
 
 ; char* strClone(char* a)
 strClone:
+	push rbp
+	mov rbp, rsp
+	
+	sub rsp, 8
+	push rdi
+	
+	call strLen
+	
+	add rax, 1
+	mov rcx, rax
+	
+	sub rsp, 8
+	push rcx
+	
+	mov rdi, rax
+
+	call malloc
+
+	pop rcx
+	add rsp, 8
+
+	pop rdi
+
+	push rax
+
+	.ciclo:
+		cmp rcx, 0
+		jbe .fin
+		mov dl, [rdi]
+		mov byte [rax], dl
+		inc rdi
+		inc rax
+		dec rcx
+		jmp .ciclo
+
+	.fin:
+
+	pop rax
+
+	add rsp, 8
+	pop rbp
 	ret
 
 ; void strDelete(char* a)
 strDelete:
+	push rbp
+	mov rbp, rsp
+
+	call free
+
+	pop rbp
 	ret
 
 ; void strPrint(char* a, FILE* pFile)
@@ -77,8 +124,8 @@ strLen:
 	jz .fin
 
 	.ciclo:
-		mov bl, [rdi]
-		cmp bl, 0
+		mov dl, [rdi]
+		cmp dl, 0
 		je .fin
 		add rdi, 1
 		add rax, 1

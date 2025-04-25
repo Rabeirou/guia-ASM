@@ -9,6 +9,8 @@
 
 int main() {
 	/* Acá pueden realizar sus propias pruebas */
-	strCmp("hola", "hole");
+	char* a = "Omega 4";
+	char* ac = TEST_CALL_S(strClone, a);
+	strDelete(ac);
 	return 0;
 }
