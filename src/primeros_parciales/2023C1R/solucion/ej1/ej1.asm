@@ -25,7 +25,7 @@ acumuladoPorCliente_asm:
 	mov r12, rdi ;cantidadDePagos
 	mov r13, rsi ;arr_pagos
 	
-	mov rdi, PAGO_OFFSET
+	mov rdi, 4
 	imul rdi, 10
 	call malloc ; rax = pagosPorCliente
 
@@ -34,16 +34,17 @@ acumuladoPorCliente_asm:
 	cmp r12, rdi; i == cantidadDePagos?
 	je .fin
 
-	imul rdi, 16
-	mov rsi, [r13 + rdi] ;actual
-	cmp byte [rsi + PAGO_APROBADO_OFFSET], 0 ;actual.aprobado?
+	mov r8, rdi
+	imul r8, PAGO_OFFSET
+	mov sil, byte [r13 + r8 + PAGO_APROBADO_OFFSET] ;actual.aprobado
+	cmp byte rsi, 0 ;actual.aprobado?
 	je .nextIteration
 
 	xor rcx, rcx
-	mov cl, byte [rsi + PAGO_CLIENTE_OFFSET] ;actual.cliente
+	mov cl, byte [r13 + r8 + PAGO_CLIENTE_OFFSET] ;actual.cliente
 	xor rdx, rdx
-	mov dl, byte [rsi + PAGO_MONTO_OFFSET] ;actual.monto
-	add [rax + rcx], rdx ;pagosPorClienteActual += montoActual
+	mov dl, byte [r13 + r8 + PAGO_MONTO_OFFSET] ;actual.monto
+	add [rax + rcx * 4], rdx ;pagosPorClienteActual += montoActual
 
 .nextIteration:
 	inc rdi
