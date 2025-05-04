@@ -31,5 +31,10 @@ typedef struct msg {
 
 char** agrupar(msg_t* msgArr, size_t msgArr_len);
 char** agrupar_c(msg_t* msgArr, size_t msgArr_len);
+/**
+ * 	Concatena dos strings a y b. 
+ *  Retorna el resultado en uno nuevo, creado via malloc.
+*/
+char* str_concat(char* a, char* b);
 
 #endif
