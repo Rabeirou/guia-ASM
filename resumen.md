@@ -49,3 +49,10 @@ $ gdb <ejecutable>
 >>> p $rcx  //imprime el contenido del registro RCX
 >>> p *(uint32_t*)$rbp //castea el contenido de RBP como puntero a uint32_t, lo desferencia e imprime el contenido de la dirección de memoria
 ```
+
+## Instrucciones utiles
+``` assembly
+movzx rdi, dil: zero-extends the 8-bit dil into rdi — good for unsigned values.
+
+movsx rdi, dil: sign-extends the 8-bit dil into rdi — good for signed values.
+```

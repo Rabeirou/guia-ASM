@@ -1,5 +1,6 @@
 global agrupar
 extern malloc
+extern calloc
 extern strcmp
 extern str_concat
 extern free
@@ -35,17 +36,8 @@ agrupar:
 
     mov rdi, MAX_TAGS
     imul rdi, 8
-    call malloc ;llamo a malloc pidiendo 8*MAX_TAGS bytes de espacio
+    call calloc ;llamo a calloc pidiendo 8*MAX_TAGS bytes de espacio y se inicializa en 0 (string vacío)
     mov r14, rax ;arrMsgConcatenados
-
-    xor rdi, rdi ;i = 0
-.loopInitializeStrings:
-    cmp rdi, MAX_TAGS ;i == MAX_TAGS?
-    je .continue
-
-    mov qword [r14 + rdi * 8], 0 ;arrMsgConcatenados[i] = ""
-    inc rdi
-    jmp .loopInitializeStrings
 
 .continue:
     xor r15, r15 ;i = 0
