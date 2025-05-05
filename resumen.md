@@ -35,6 +35,9 @@ Menciones especiales:
 - XMM8 a XMM15 no están en el grupo de los registros por los que se pasan parámetros pero están a disposición, no se olviden de su existencia.
 
 ## GDB
+
+Instalación: https://github.com/cyrus-and/gdb-dashboard
+
 ``` shell
 $ gdb <ejecutable>
 ```
